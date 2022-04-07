@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JapTask1.Services", "JapTas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JapTask1.Mapper", "JapTask1.Mapper\JapTask1.Mapper.csproj", "{84BD956D-0ACD-468B-9743-2C74765714EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapTask1.Tests", "JapTask1.Tests\JapTask1.Tests.csproj", "{FE9C988B-D047-4F87-9B92-67B7008EED8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JapTask1.Tests", "JapTask1.Tests\JapTask1.Tests.csproj", "{FE9C988B-D047-4F87-9B92-67B7008EED8C}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "JapTask_Frontend", "JapTask_Frontend\JapTask_Frontend.esproj", "{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,12 @@ Global
 		{FE9C988B-D047-4F87-9B92-67B7008EED8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE9C988B-D047-4F87-9B92-67B7008EED8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE9C988B-D047-4F87-9B92-67B7008EED8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA58A11-3F21-4E80-9105-2B5CFC86FD98}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

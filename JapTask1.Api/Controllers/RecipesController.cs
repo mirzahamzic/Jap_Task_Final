@@ -53,8 +53,8 @@ namespace JapTask1.Api.Controllers
             return Ok(await _recipeService.Search(req));
         }
 
-        [HttpGet, Route("getByCategory/{categoryId}/{limit}")]
-        public async Task<ActionResult<ServiceResponse<List<GetRecipeDto>>>> GetByCategory(int categoryId, BaseSearch req)
+        [HttpGet, Route("getByCategory/{categoryId}")]
+        public async Task<ActionResult<ServiceResponse<List<GetRecipeDto>>>> GetByCategory(int categoryId, [FromQuery] BaseSearch req)
 
         {
             return Ok(await _recipeService.GetByCategory(categoryId, req));
