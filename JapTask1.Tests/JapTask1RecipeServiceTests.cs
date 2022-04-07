@@ -164,20 +164,20 @@ namespace JapTask1.Tests
             Assert.IsNotNull(dbRecipes.CreatedAt);
         }
 
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        public async Task TestLoadMore(int page_size)
-        {
-            //arrange
+        //[TestCase(1)]
+        //[TestCase(2)]
+        //[TestCase(3)]
+        //public async Task TestLoadMore(int page_size)
+        //{
+        //    //arrange
 
 
-            //act
-            var result = await _recipeService.Get(new BaseSearch { Limit = 0, PageSize = page_size });
+        //    //act
+        //    //var result = await _recipeService.Get(new BaseSearch { Limit = 0, PageSize = page_size });
 
-            //assert
-            Assert.That(result.Data.Count, Is.EqualTo(page_size));
-        }
+        //    //assert
+        //    Assert.That(result.Data.Count, Is.EqualTo(page_size));
+        //}
 
 
         //setting up in-memory database with fake data

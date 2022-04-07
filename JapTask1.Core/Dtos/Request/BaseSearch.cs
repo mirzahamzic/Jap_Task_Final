@@ -8,7 +8,13 @@ namespace JapTask1.Core.Dtos.Request
 {
     public class BaseSearch
     {
-        public int? Limit { get; set; }
+        public int? Limit
+        {
+            get
+            {
+                return (Page - 1) * PageSize;
+            }
+        }
         public int? Page { get; set; }
         public int? PageSize { get; set; }
     }

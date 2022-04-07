@@ -22,9 +22,9 @@ namespace JapTask1.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] IngredientSearch req)
         {
-            var response = await _ingredientService.Get();
+            var response = await _ingredientService.Get(req);
 
             return Ok(response);
         }

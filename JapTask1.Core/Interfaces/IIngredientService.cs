@@ -9,7 +9,7 @@ namespace JapTask1.Core.Interfaces
 {
     public interface IIngredientService
     {
-        Task<ServiceResponse<List<GetIngredientDto>>> Get();
+        Task<ServiceResponse<List<GetIngredientDto>>> Get(IngredientSearch req);
         Task<ServiceResponse<GetIngredientDto>> GetById(int Id);
         Task<ServiceResponse<GetIngredientDto>> Create(AddIngredientDto req);
         Task<ServiceResponse<GetIngredientDto>> Update(AddIngredientDto req);

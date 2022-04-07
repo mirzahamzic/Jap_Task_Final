@@ -31,6 +31,8 @@ namespace JapTask1.Services.CategoryService
         {
             var query = _context.Categories.AsQueryable();
 
+            //req.Limit = (req.Page - 1) * req.PageSize;
+
             if (req.Name != null)
             {
                 query = query
