@@ -26,7 +26,7 @@ namespace JapTask1.Services.RecipeService
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        private readonly int userIdForTesting = 1; //set to 1 for testing, set to 0 for prod.
+        private readonly int userIdForTesting = 0; //set to 1 for testing, set to 0 for prod.
 
         public RecipeService(AppDbContext context, IMapper mapper, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
@@ -162,7 +162,7 @@ namespace JapTask1.Services.RecipeService
 
             if (dbRecipes == null)
             {
-                throw new ArgumentException("Ne postoji recept");
+                throw new ArgumentException(nameof(dbRecipes));
             }
 
             return new ServiceResponse<GetRecipeDto>()
@@ -195,6 +195,46 @@ namespace JapTask1.Services.RecipeService
             return new ServiceResponse<List<GetRecipeDto>>()
             {
                 Data = dbRecipes
+            };
+        }
+
+        public async Task<ServiceResponse<GetRecipeDto>> Update(UpdateRecipeDto recipe)
+        {
+            var dbRecipe = await _context.Recipes.FirstOrDefaultAsync(r => r.Id == recipe.Id && r.UserId == GetUserId());
+
+            if (dbRecipe == null)
+            {
+                throw new ArgumentException(nameof(dbRecipe));
+            }
+
+            var updatedRecipe = _mapper.Map<Recipe>(recipe);
+
+            updatedRecipe.UserId = GetUserId();
+
+            _context.Entry(dbRecipe).CurrentValues.SetValues(updatedRecipe);
+
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<GetRecipeDto>()
+            {
+                //Data = _mapper.Map<GetRecipeDto>(updatedRecipe)
+                Message = "Recipe updated successfully."
+            };
+        }
+
+        public async Task<ServiceResponse<GetRecipeDto>> Delete(int id)
+        {
+            var dbRecipe = await _context.Ingredients.FirstOrDefaultAsync(i => i.Id == id);
+
+            if (dbRecipe == null) { throw new ArgumentNullException(nameof(dbRecipe)); }
+
+            _context.Ingredients.Remove(dbRecipe);
+
+            _context.SaveChanges();
+
+            return new ServiceResponse<GetRecipeDto>()
+            {
+                Message = "Deleted."
             };
         }
     }

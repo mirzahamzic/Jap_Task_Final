@@ -17,6 +17,7 @@ namespace JapTask1.Api.Extensions
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IRecipeIngredientService, RecipeIngredientService>();
         }
     }
 }

@@ -59,5 +59,19 @@ namespace JapTask1.Api.Controllers
         {
             return Ok(await _recipeService.GetByCategory(categoryId, req));
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] UpdateRecipeDto newRecipe)
+        {
+            var response = await _recipeService.Update(newRecipe);
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _recipeService.Delete(id);
+            return Ok(response);
+        }
     }
 }

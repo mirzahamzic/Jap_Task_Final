@@ -16,6 +16,8 @@ namespace JapTask1.Core.Interfaces
         Task<ServiceResponse<GetRecipeDto>> GetById(int recipeId);
         Task<ServiceResponse<AddRecipeDto>> Create(AddRecipeDto recipe);
         Task<ServiceResponse<List<GetRecipeDto>>> Search(RecipeSearch req);
+        Task<ServiceResponse<GetRecipeDto>> Update(UpdateRecipeDto recipe);
+        Task<ServiceResponse<GetRecipeDto>> Delete(int id);
 
     }
 }
