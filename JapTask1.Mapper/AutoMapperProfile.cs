@@ -21,7 +21,7 @@ namespace JapTask1.Mapper
             .ForMember(dest => dest.TotalCost, o => o.MapFrom(src => Calculator.RecipeTotalCost(src)));
 
 
-            CreateMap<RecipeIngredient, GetIngredientDto>()
+            CreateMap<RecipeIngredient, GetRecipeIngredientDto>()
             .ForMember(dest => dest.Name, o => o.MapFrom(src => src.Ingredient.Name))
             .ForMember(dest => dest.Price, o => o.MapFrom(src => Calculator.PricePerIngredient(src.Ingredient.PurchasedQuantity, src.Ingredient.PurchasedUnitOfMeasure, src.Ingredient.PurchasedPrice, src.Unit, src.Quantity)));
 

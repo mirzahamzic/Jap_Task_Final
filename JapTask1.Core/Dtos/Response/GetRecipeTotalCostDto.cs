@@ -10,6 +10,6 @@ namespace JapTask1.Core.Dtos.Response
     {
         public double TotalCost { get; set; }
 
-        public GetIngredientDto Ingredients { get; set; }
+        public GetRecipeIngredientDto Ingredients { get; set; }
     }
 }

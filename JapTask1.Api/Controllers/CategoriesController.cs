@@ -21,10 +21,38 @@ namespace JapTask1.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories([FromQuery] CategorySearch req)
+        public async Task<IActionResult> Get([FromQuery] CategorySearch req)
         {
-            var allCategories = await _categoryService.Get(req);
-            return Ok(allCategories);
+            var response = await _categoryService.Get(req);
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var response = await _categoryService.GetById(id);
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AddCategoryDto req)
+        {
+            var response = await _categoryService.Create(req);
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromBody] AddCategoryDto req)
+        {
+            var response = await _categoryService.Update(req);
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _categoryService.Delete(id);
+            return Ok(response);
         }
     }
 }

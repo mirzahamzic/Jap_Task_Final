@@ -12,7 +12,7 @@ namespace JapTask1.Core.Dtos.Response
         public int Id { get; set; }
         public string CategoryName { get; set; }
         public double TotalCost { get; set; } // { get { return Ingredients.Sum(i => i.Price); } }
-        public List<GetIngredientDto> Ingredients { get; set; }
+        public List<GetRecipeIngredientDto> Ingredients { get; set; }
 
     }
 }

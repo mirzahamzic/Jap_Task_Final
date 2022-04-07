@@ -25,13 +25,17 @@ namespace JapTask1.Mapper
             CreateMap<Recipe, SecondSpDto>();
 
 
-            CreateMap<RecipeIngredient, GetIngredientDto>()
+            CreateMap<RecipeIngredient, GetRecipeIngredientDto>()
             .ForMember(dest => dest.Name, o => o.MapFrom(src => src.Ingredient.Name))
             .ForMember(dest => dest.Price, o => o.MapFrom(src => Calculator.PricePerIngredient(src.Ingredient.PurchasedQuantity, src.Ingredient.PurchasedUnitOfMeasure, src.Ingredient.PurchasedPrice, src.Unit, src.Quantity)))
             .ForMember(dest => dest.Unit, o => o.MapFrom(src => Enum.GetName(typeof(Units), src.Unit)));
 
             CreateMap<Category, GetCategoryDto>();
-            CreateMap<Ingredient, IngredientDto>();
+            CreateMap<AddCategoryDto, Category>();
+
+
+            CreateMap<Ingredient, GetIngredientDto>().ReverseMap();
+            CreateMap<AddIngredientDto, Ingredient>().ReverseMap();
 
 
         }
