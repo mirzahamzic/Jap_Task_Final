@@ -1,29 +1,42 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { GiMeal } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAllCategories } from "../../store/categories/category-slice";
 
-const CategoryItem = ({ category }) => {
-  const categoryName = category.name;
+const CategoryItem = ({ category, index }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleEdit = () => {
+    dispatch(getAllCategories(category.id));
+    navigate("/editingredient");
+  };
+
   return (
-    <Card className="m-4">
-      <Card.Header></Card.Header>
-      <Card.Body className="text-center">
-        <h1>
-          <GiMeal className="text-warning" />
-        </h1>
-        <hr />
-        <h4>{category.name}</h4>
-        <Link
-          to={`/recipes/category/${category.id}`}
-          state={{ name: categoryName }}
+    <tr>
+      <td>{index + 1}</td>
+      <td>{category.name}</td>
+      <td className="d-flex justify-content-end">
+        <Button
+          variant="warning"
+          size="sm"
+          className="me-2"
+          onClick={handleEdit}
         >
-          <Button size="sm" variant="success" className="mt-4">
-            View
-          </Button>
-        </Link>
-      </Card.Body>
-    </Card>
+          Edit
+        </Button>
+        <Button variant="danger" size="sm" onClick={handleShow}>
+          Delete
+        </Button>
+      </td>
+    </tr>
   );
 };
 

@@ -11,8 +11,11 @@ import Home from "./pages/Home";
 import RecipesByCategory from "./components/recipes/RecipesByCategory";
 import RecipeDetail from "./pages/RecipeDetail";
 import Header from "./components/Header";
+import Ingredient from "./pages/Ingredient";
 
 import "./assets/css/bootstrap.min.css";
+import IngredientForm from "./components/ingredients/IngredientForm";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -23,12 +26,16 @@ function App() {
           <Routes>
             {/* public routes */}
             <Route path="/login" element={<Login />} />
+            <Route path="/ingredients" element={<Ingredient />} />
+            <Route path="/categories" element={<Category />} />
             <Route path="/" element={<Login />} />
 
             {/* protected routes */}
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<Home />} />
               <Route path="/addrecipe" element={<AddRecipe />} />
+              <Route path="/addingredient" element={<IngredientForm />} />
+              <Route path="/editingredient" element={<IngredientForm />} />
               <Route
                 path="/recipes/category/:categoryId"
                 element={<RecipesByCategory />}

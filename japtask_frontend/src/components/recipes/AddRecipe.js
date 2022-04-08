@@ -14,7 +14,10 @@ import {
   getAllIngredients,
   reset as resetIngredients,
 } from "../../store/ingredients/ingredient-slice";
-import { getAllCategories, getAllCategoriesNoLoadMore } from "../../store/categories/category-slice";
+import {
+  getAllCategories,
+  getAllCategoriesNoLoadMore,
+} from "../../store/categories/category-slice";
 
 const AddRecipe = (props) => {
   const dispatch = useDispatch();
@@ -33,8 +36,8 @@ const AddRecipe = (props) => {
       toast.error(message);
     }
 
-    dispatch(getAllIngredients());
-    dispatch(getAllCategories())
+    dispatch(getAllIngredients({ pageSize: 5, page: 1 }));
+    dispatch(getAllCategories());
   }, [dispatch, isError, isSuccess, navigate, message]);
 
   const {
@@ -74,7 +77,7 @@ const AddRecipe = (props) => {
 
   return (
     <Container className="my-5">
-      <h3>Add your recipe</h3>
+      <h3>Add recipe</h3>
       <hr />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
