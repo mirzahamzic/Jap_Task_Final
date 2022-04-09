@@ -16,6 +16,9 @@ import Ingredient from "./pages/Ingredient";
 import "./assets/css/bootstrap.min.css";
 import IngredientForm from "./components/ingredients/IngredientForm";
 import Category from "./pages/Category";
+import CategoryForm from "./components/categories/CategoryForm";
+import Recipe from "./pages/Recipe";
+import RecipeForm from "./components/recipes/RecipeForm";
 
 function App() {
   return (
@@ -28,14 +31,18 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/ingredients" element={<Ingredient />} />
             <Route path="/categories" element={<Category />} />
+            <Route path="/recipes" element={<Recipe />} />
             <Route path="/" element={<Login />} />
 
             {/* protected routes */}
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<Home />} />
-              <Route path="/addrecipe" element={<AddRecipe />} />
+              <Route path="/addrecipe" element={<RecipeForm />} />
+              <Route path="/editrecipe" element={<RecipeForm />} />
               <Route path="/addingredient" element={<IngredientForm />} />
               <Route path="/editingredient" element={<IngredientForm />} />
+              <Route path="/addcategory" element={<CategoryForm />} />
+              <Route path="/editcategory" element={<CategoryForm />} />
               <Route
                 path="/recipes/category/:categoryId"
                 element={<RecipesByCategory />}

@@ -41,7 +41,7 @@ namespace JapTask1.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromBody] AddCategoryDto req)
         {
             var response = await _categoryService.Update(req);

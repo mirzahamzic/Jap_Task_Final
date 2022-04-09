@@ -9,17 +9,15 @@ const initialState = {
   message: "",
   isError: false,
   isSuccess: false,
-  isLoading: false,
-  isLoadMore: true,
 };
 
 // Get all categories
 export const getAllCategories = createAsyncThunk(
   "categories/getAllCategories",
-  async (_, thunkAPI) => {
+  async (params, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.data;
-      return await categoryService.getAllCategories(token);
+      return await categoryService.getAllCategories(params, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -33,13 +31,75 @@ export const getAllCategories = createAsyncThunk(
   }
 );
 
-// Get all categories
-export const getAllCategoriesNoLoadMore = createAsyncThunk(
-  "categories/getAllCategoriesNoLoadMore",
-  async (_, thunkAPI) => {
+// Get category by Id
+export const getCategory = createAsyncThunk(
+  "categories/getCategory",
+  async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.data;
-      return await categoryService.getAllCategoriesNoLoadMore(token);
+      return await categoryService.getCategoryById(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Add category
+export const addCategory = createAsyncThunk(
+  "ingredients/addCategory",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.data;
+      // const token = "dummytokenfornow";
+      return await categoryService.addCategory(data, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Update category
+export const updateCategory = createAsyncThunk(
+  "ingredients/updateCategory",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.data;
+      // const token = "dummytokenfornow";
+      return await categoryService.updateCategory(data, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Delete category by Id
+export const deleteCategory = createAsyncThunk(
+  "categories/getCategory",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.data;
+      return await categoryService.deleteCategory(id, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -58,6 +118,12 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
+    deleteStateCategory(state, action) {
+      state.categories = state.categories.filter(
+        (category) => category.id !== action.payload
+      );
+      console.log(state.categories);
+    },
   },
   extraReducers: {
     [getAllCategories.pending]: (state) => {
@@ -66,22 +132,58 @@ export const categorySlice = createSlice({
     [getAllCategories.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.categories = action.payload.data
+      state.categories = action.payload.data;
     },
     [getAllCategories.rejected]: (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     },
-    [getAllCategoriesNoLoadMore.pending]: (state) => {
+    [getCategory.pending]: (state) => {
       state.isLoading = true;
     },
-    [getAllCategoriesNoLoadMore.fulfilled]: (state, action) => {
+    [getCategory.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.categoriesInMenu = action.payload;
+      state.currentCategory = action.payload.data;
     },
-    [getAllCategoriesNoLoadMore.rejected]: (state, action) => {
+    [getCategory.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = action.payload;
+    },
+    [addCategory.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [addCategory.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+    },
+    [addCategory.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = action.payload;
+    },
+    [updateCategory.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateCategory.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+    },
+    [updateCategory.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = action.payload;
+    },
+    [deleteCategory.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteCategory.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+    },
+    [deleteCategory.rejected]: (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
@@ -89,5 +191,5 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { reset } = categorySlice.actions;
+export const { reset, deleteStateCategory } = categorySlice.actions;
 export default categorySlice.reducer;

@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { GiMeal } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SharedModal from "../shared/SharedModal";
-import {
-  getCategory,
-  deleteCategory,
-  getAllCategories,
-  deleteStateCategory,
-} from "../../store/categories/category-slice";
 
-const CategoryItem = ({ category, index }) => {
+const RecipeIngredientItem = ({ ingredient, index }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,23 +14,17 @@ const CategoryItem = ({ category, index }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleEdit = () => {
-    dispatch(getCategory(category.id));
-    navigate("/editcategory");
-  };
-
   return (
     <>
       <tr>
         <td>{index + 1}</td>
-        <td>{category.name}</td>
+        <td>{ingredient.name}</td>
+        <td>
+            <Form.Control value={ingredient.quantity} />
+        </td>
+        <td>{ingredient.unit}</td>
         <td className="d-flex justify-content-end">
-          <Button
-            variant="warning"
-            size="sm"
-            className="me-2"
-            onClick={handleEdit}
-          >
+          <Button variant="warning" size="sm" className="me-2">
             Edit
           </Button>
           <Button variant="danger" size="sm" onClick={handleShow}>
@@ -44,15 +32,9 @@ const CategoryItem = ({ category, index }) => {
           </Button>
         </td>
       </tr>
-      <SharedModal
-        show={show}
-        handleClose={handleClose}
-        action={deleteCategory}
-        id={category.id}
-        dispatch={deleteStateCategory}
-      />
+      <SharedModal show={show} handleClose={handleClose} />
     </>
   );
 };
 
-export default CategoryItem;
+export default RecipeIngredientItem;

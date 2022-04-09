@@ -17,6 +17,14 @@ namespace JapTask1.Api.Controllers
             _recipeIngredientService = recipeIngredientService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get(int recipeId)
+        {
+            var response = await _recipeIngredientService.Get(recipeId);
+            return Ok(response);
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(int recipeId, [FromBody] AddRecipeIngredientDto req)
         {

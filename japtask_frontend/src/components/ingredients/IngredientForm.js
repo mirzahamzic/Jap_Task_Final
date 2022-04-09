@@ -33,7 +33,6 @@ const IngredientForm = () => {
   }, [currentIngredient, reset]);
 
   const onSubmit = (data) => {
-    data.purchasedUnitOfMeasure = parseInt(data.purchasedUnitOfMeasure);
     if (Object.keys(currentIngredient).length === 0) {
       dispatch(addIngredient(data));
       toast.info("Ingredient added.");
@@ -120,11 +119,11 @@ const IngredientForm = () => {
             <option default disabled>
               Choose measure unit
             </option>
-            <option value="0">Kilogram</option>
-            <option value="1">Gram</option>
-            <option value="2">Liter</option>
-            <option value="3">Milliliter</option>
-            <option value="4">Pieces</option>
+            <option value="Kg">Kilogram</option>
+            <option value="Gr">Gram</option>
+            <option value="L">Liter</option>
+            <option value="Ml">Milliliter</option>
+            <option value="kom">Pieces</option>
           </Form.Select>
           <Form.Control.Feedback type="invalid">
             {errors.purchasedUnitOfMeasure &&

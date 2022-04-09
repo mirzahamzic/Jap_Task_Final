@@ -74,6 +74,17 @@ namespace JapTask1.Services
             return new ServiceResponse<GetRecipeIngredientDto>() { Message = "Deleted." };
         }
 
+        public async Task<ServiceResponse<List<UpdateRecipeIngredientDto>>> Get(int recipeId)
+        {
+            var dbRecipeIngredients = await _context.RecipesIngredients
+                    .Where(r => r.RecipeId == recipeId)
+                    .Include(i => i.Ingredient)
+                    .ToListAsync();
 
+            var res = _mapper.Map<List<UpdateRecipeIngredientDto>>(dbRecipeIngredients);
+
+
+            return new ServiceResponse<List<UpdateRecipeIngredientDto>>() { Data = res };
+        }
     }
 }

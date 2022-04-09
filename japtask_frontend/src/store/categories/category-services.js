@@ -1,45 +1,86 @@
 import axios from "axios";
 
-const API_URL = "/api/Categories/";
+const BASE_URL = "https://localhost:5001";
 
-// Get all categories with the load more option
-const getAllCategories = async (token) => {
+// Get all categories
+const getAllCategories = async (params, token) => {
+  console.log(params);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
     params: {
-      pageSize: 5,
-      page: 1,
+      page: params.page,
+      pageSize: params.pageSize,
     },
   };
 
-  const response = await axios.get(
-    "https://localhost:5001/api/Categories/",
-    config
-  );
+  const response = await axios.get(BASE_URL + "/api/Categories/", config);
 
   return response.data;
 };
 
-// Get all categories without the load more option
-const getAllCategoriesNoLoadMore = async (token) => {
+// Get category by Id
+const getCategoryById = async (id, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get(
-    "https://localhost:5001/api/Categories/get-all-categories",
+
+  const response = await axios.get(BASE_URL + "/api/Categories/" + id, config);
+
+  return response.data;
+};
+
+// Add category
+const addCategory = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.post(
+    BASE_URL + "/api/Categories/",
+    data,
     config
   );
 
   return response.data;
 };
 
-const categoryServices = {
-  getAllCategories,
-  getAllCategoriesNoLoadMore,
+// Update category
+const updateCategory = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(BASE_URL + "/api/Categories/", data, config);
+  return response.data;
 };
 
-export default categoryServices;
+// Delete category
+const deleteCategory = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(
+    BASE_URL + "/api/Categories/" + id,
+    config
+  );
+  return response.data;
+};
+
+const ingredientService = {
+  getAllCategories,
+  getCategoryById,
+  addCategory,
+  updateCategory,
+  deleteCategory,
+};
+
+export default ingredientService;

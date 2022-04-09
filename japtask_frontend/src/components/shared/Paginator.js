@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
-import {
-  getAllIngredients,
-  setPageSizeRedux,
-} from "../../store/ingredients/ingredient-slice";
+import { setPageSizeRedux } from "../../store/paging/page-slice";
 
 const Paginator = (props) => {
   const [pageSize, setPageSize] = useState("5");
@@ -13,11 +10,10 @@ const Paginator = (props) => {
   const onPageChange = (e) => {
     if (e.target.value === "Choose pagination") return;
     setPageSize(e.target.value);
-    
   };
 
   useEffect(() => {
-    dispatch(setPageSizeRedux(pageSize))
+    dispatch(setPageSizeRedux(pageSize));
     dispatch(props.action({ pageSize, page: 1 }));
   }, [pageSize, dispatch]);
 

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, Form, Container, Spinner } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
 import { loginUser, reset } from "../store/auth/auth-slice";
 import { toast } from "react-toastify";
 import { FaSignInAlt } from "react-icons/fa";
+import Spinner from "../components/shared/Spinner/Spinner";
 
 const Login = (props) => {
   const dispatch = useDispatch();

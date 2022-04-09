@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JapTask1.Common.Enums;
 using JapTask1.Core.Dtos.Request;
 using JapTask1.Core.Dtos.Response;
 using JapTask1.Core.Entities;
@@ -212,7 +213,6 @@ namespace JapTask1.Services.RecipeService
             updatedRecipe.UserId = GetUserId();
 
             _context.Entry(dbRecipe).CurrentValues.SetValues(updatedRecipe);
-
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<GetRecipeDto>()

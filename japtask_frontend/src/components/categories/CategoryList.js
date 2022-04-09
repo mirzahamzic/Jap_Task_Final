@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../store/categories/category-slice";
 import { toast } from "react-toastify";
 import CategoryItem from "./CategoryItem";
 import { FaPlus } from "react-icons/fa";
+import Paginator from "../shared/Paginator";
+import Spinner from "../shared/Spinner/Spinner";
 
 const CategoryList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { categories, isError, isSuccess, message, isLoadMore } = useSelector(
+  const { categories, isError, isLoading, message } = useSelector(
     (state) => state.category
   );
-
-  const [limit, setLimit] = useState(0);
 
   useEffect(() => {
     if (isError) {
       toast.error(message);
     }
 
-    dispatch(getAllCategories(limit));
-  }, [isError, limit]);
+    dispatch(getAllCategories({}));
+  }, [isError, dispatch, message]);
+
+  if (isLoading) {
+    <Spinner />;
+  }
 
   return (
     <Container>
@@ -34,7 +38,12 @@ const CategoryList = () => {
             <FaPlus /> Add Category
           </Button>
         </div>
-      </section>{" "}
+      </section>
+      <section className="my-2 d-flex justify-content-end">
+        <div>
+          <Paginator action={getAllCategories} />
+        </div>
+      </section>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>

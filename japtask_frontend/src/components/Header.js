@@ -42,6 +42,15 @@ function Header() {
                       </span>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
+                      <Dropdown.Item as={NavLink} to="/recipes">
+                        Recipes
+                      </Dropdown.Item>
+                      <Dropdown.Item as={NavLink} to="/ingredients">
+                        Ingredients
+                      </Dropdown.Item>
+                      <Dropdown.Item as={NavLink} to="/categories">
+                        Categories{" "}
+                      </Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
                     </Dropdown.Menu>

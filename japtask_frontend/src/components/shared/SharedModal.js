@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getAllIngredients } from "../../store/ingredients/ingredient-slice";
 
 const SharedModal = (props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onDelete = () => {
     dispatch(props.action(props.id));
-    dispatch(getAllIngredients({}));
+    dispatch(props.dispatch(props.id));
     toast.info("Element deleted successfully");
     props.handleClose();
   };

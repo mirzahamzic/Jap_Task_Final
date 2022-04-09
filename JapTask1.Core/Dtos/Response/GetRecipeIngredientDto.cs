@@ -5,6 +5,7 @@ namespace JapTask1.Core.Dtos.Response
 {
     public class GetRecipeIngredientDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public double Quantity { get; set; }
         public Units Unit { get; set; }

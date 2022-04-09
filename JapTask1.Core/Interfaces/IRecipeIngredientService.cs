@@ -11,6 +11,7 @@ namespace JapTask1.Core.Interfaces
 {
     public interface IRecipeIngredientService
     {
+        Task<ServiceResponse<List<UpdateRecipeIngredientDto>>> Get(int recipeId);
         Task<GetRecipeIngredientDto> Create(int recipeId, AddRecipeIngredientDto ingredient);
         Task<GetRecipeIngredientDto> Update(int recipeId, UpdateRecipeIngredientDto ingredient);
         Task<ServiceResponse<GetRecipeIngredientDto>> Delete(int id, int recipeId);

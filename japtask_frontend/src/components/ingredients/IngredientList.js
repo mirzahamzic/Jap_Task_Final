@@ -1,27 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllIngredients } from "../../store/ingredients/ingredient-slice";
-import { Spinner, Table, Container, Row, Col, Button } from "react-bootstrap";
+import { Table, Container, Row, Col, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import IngredientItem from "./IngredientItem";
 import Paginator from "../shared/Paginator";
 import { FaSort, FaPlus } from "react-icons/fa";
 import Filter from "../shared/Filter";
 import { Link } from "react-router-dom";
+import Spinner from "../shared/Spinner/Spinner";
 
 const IngredientList = () => {
-  const {
-    ingredients,
-    isError,
-    isSuccess,
-    isLoading,
-    message,
-    pageSizeRedux,
-    minRangeRedux,
-    maxRangeRedux,
-    unitsRedux,
-    nameRedux,
-  } = useSelector((state) => state.ingredient);
+  const { ingredients, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.ingredient
+  );
+
+  const { pageSizeRedux, minRangeRedux, maxRangeRedux, unitsRedux, nameRedux } =
+    useSelector((state) => state.paging);
 
   const dispatch = useDispatch();
 
@@ -83,36 +78,36 @@ const IngredientList = () => {
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>#</th>
-            <th>
+            <th width="10%">#</th>
+            <th width="20%">
               Ingredient{" "}
               <FaSort
                 onClick={() => onSort("Name")}
                 style={{ cursor: "pointer" }}
               />
             </th>
-            <th>
+            <th width="10%">
               Quantity{" "}
               <FaSort
                 onClick={() => onSort("PurchasedQuantity")}
                 style={{ cursor: "pointer" }}
               />
             </th>
-            <th>
+            <th width="20%">
               Unit of Measure{" "}
               <FaSort
                 onClick={() => onSort("PurchasedUnitOfMeasure")}
                 style={{ cursor: "pointer" }}
               />
             </th>
-            <th>
+            <th width="10%">
               Cost{" "}
               <FaSort
                 onClick={() => onSort("PurchasedPrice")}
                 style={{ cursor: "pointer" }}
               />
             </th>
-            <th>Actions</th>
+            <th width="20%">Actions</th>
           </tr>
         </thead>
         <tbody>

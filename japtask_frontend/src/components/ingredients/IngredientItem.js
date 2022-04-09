@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getIngredient,
   deleteIngredient,
+  getAllIngredients,
 } from "../../store/ingredients/ingredient-slice";
 import SharedModal from "../shared/SharedModal";
 
@@ -29,7 +30,7 @@ const IngredientItem = ({ ingredient, index }) => {
         <td>{index + 1}</td>
         <td>{ingredient.name}</td>
         <td>{ingredient.purchasedQuantity.toFixed(2)}</td>
-        <td>{unit(ingredient.purchasedUnitOfMeasure)}</td>
+        <td>{ingredient.purchasedUnitOfMeasure}</td>
         <td className="text-success">{ingredient.purchasedPrice} KM</td>
         <td className="d-flex justify-content-end">
           <Button
@@ -50,6 +51,7 @@ const IngredientItem = ({ ingredient, index }) => {
         handleClose={handleClose}
         action={deleteIngredient}
         id={ingredient.id}
+        dispatch={getAllIngredients}
       />
     </>
   );

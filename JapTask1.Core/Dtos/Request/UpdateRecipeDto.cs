@@ -9,5 +9,7 @@ namespace JapTask1.Core.Dtos.Request
     public class UpdateRecipeDto : RecipeDto
     {
         public int Id { get; set; }
+        public List<AddRecipeIngredientDto> AddRecipeIngredientDto { get; set; }
+
     }
 }
