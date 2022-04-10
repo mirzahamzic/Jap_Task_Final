@@ -47,13 +47,20 @@ namespace JapTask1.Services
             var dbIngredient = await _context.RecipesIngredients
                     .FirstOrDefaultAsync(i => i.RecipeId == recipeId && i.Id == ingredient.Id);
 
-            if (dbIngredient == null) { throw new ArgumentNullException(nameof(dbIngredient)); }
+            //if (dbIngredient == null) { throw new ArgumentNullException(nameof(dbIngredient)); }
 
             var updatedIngredient = _mapper.Map<RecipeIngredient>(ingredient);
-
             updatedIngredient.RecipeId = recipeId;
 
-            _context.Entry(dbIngredient).CurrentValues.SetValues(updatedIngredient);
+            if (dbIngredient == null)
+            {
+                _context.RecipesIngredients.Add(updatedIngredient);
+            }
+            else
+            {
+                _context.Entry(dbIngredient).CurrentValues.SetValues(updatedIngredient);
+            }
+
             await _context.SaveChangesAsync();
 
             var response = _mapper.Map<GetRecipeIngredientDto>(updatedIngredient);

@@ -119,7 +119,7 @@ export const getRecipeIngredients = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.data;
-      return await recipeService.recipeIngredients(id, token);
+      return await recipeService.getRecipeIngredients(id, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -144,6 +144,10 @@ export const recipeSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
     },
+    resetCurrent(state) {
+      state.currentRecipe = {};
+    },
+
     deleteStateRecipe(state, action) {
       state.recipes = state.recipes.filter(
         (recipe) => recipe.id !== action.payload
@@ -229,7 +233,8 @@ export const recipeSlice = createSlice({
   },
 });
 
-export const { reset, deleteStateRecipe, resetMessage } = recipeSlice.actions;
+export const { reset, deleteStateRecipe, resetMessage, resetCurrent } =
+  recipeSlice.actions;
 export default recipeSlice.reducer;
 
 // import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";

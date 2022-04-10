@@ -17,6 +17,9 @@ const CategoryList = () => {
     (state) => state.category
   );
 
+  const { user } = useSelector((state) => state.auth);
+
+
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -34,9 +37,9 @@ const CategoryList = () => {
       <section className="my-5 d-flex justify-content-between">
         <h1>Categories</h1>
         <div>
-          <Button as={Link} to="/addcategory" variant="success" size="lg">
+          {user && <Button as={Link} to="/addcategory" variant="success" size="lg">
             <FaPlus /> Add Category
-          </Button>
+          </Button>}
         </div>
       </section>
       <section className="my-2 d-flex justify-content-end">

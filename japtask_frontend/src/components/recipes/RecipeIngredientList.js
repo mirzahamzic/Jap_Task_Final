@@ -8,41 +8,38 @@ import { FaPlus } from "react-icons/fa";
 import Paginator from "../shared/Paginator";
 import Spinner from "../shared/Spinner/Spinner";
 import RecipeIngredientItem from "./RecipeIngredientItem";
+import { addIngredientToRecipe } from "../../store/recipeingredients/recipeingredients-slice";
 
 const RecipeIngredientList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { recipeIngredients, currentRecipe } = useSelector(
-    (state) => state.recipe
-  );
+  const { recipeIngredients } = useSelector((state) => state.recipeIngredient);
 
-  const { id } = currentRecipe;
+  const handleAddClick = () => {
+    dispatch(
+      addIngredientToRecipe({ ingredientId: "", quantity: 0, unit: "" })
+    );
+  };
 
   return (
-    <Table striped bordered hover size="sm">
-      <thead>
-        <tr>
-          <th width="10%">#</th>
-          <th width="30%">Ingredient name</th>
-          <th width="30%">Quantity</th>
-          <th width="10%">Unit</th>
-          <th width="20%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {recipeIngredients.map((ingredient, i) => (
+    <>
+      {recipeIngredients.map((ingredient, i) => (
+        <>
           <RecipeIngredientItem
-            ingredient={ingredient}
+            recipeIngredient={ingredient}
             key={ingredient.id}
             index={i}
           />
-        ))}
-      </tbody>
-    </Table>
+          {recipeIngredients.length - 1 === i && (
+            <Button size="sm" variant="success" onClick={handleAddClick}>
+              Add
+            </Button>
+          )}
+        </>
+      ))}
+    </>
   );
 };
 
 export default RecipeIngredientList;
-
-

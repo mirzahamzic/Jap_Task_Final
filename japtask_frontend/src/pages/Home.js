@@ -1,47 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllCategories } from "../store/categories/category-slice";
-import { toast } from "react-toastify";
-import CategoryItem from "../components/categories/CategoryItem";
+import React from "react";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import { GiMeal } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const { categories, isError, isSuccess, message, isLoadMore } = useSelector(
-    (state) => state.category
-  );
-
-  const [limit, setLimit] = useState(0);
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
-    dispatch(getAllCategories(limit));
-  }, [isError, limit]);
-
-  const loadMore = () => {
-    setLimit((prevState) => prevState + 4);
-  };
-
   return (
-    <Container className="my-4 text-center">
-      <h1 className="my-5">Please choose recipe category</h1>
+    <Container>
       <Row>
-        {categories.map((category) => (
-          <Col sm={12} md={3} key={category.id}>
-            <CategoryItem category={category} />
-          </Col>
-        ))}
-        {categories.length > 3 && (
-          <Button size="lg" onClick={loadMore} disabled={!isLoadMore}>
-            Load More
-          </Button>
-        )}
+        <Col sm={12} md={4}>
+          <Card className="m-4">
+            <Card.Header></Card.Header>
+            <Card.Body className="text-center">
+              <h1>
+                <GiMeal className="text-warning" />
+              </h1>
+              <hr />
+              <h4>Recipes</h4>
+              <Link to={`/recipes`}>
+                <Button size="sm" variant="success" className="mt-4">
+                  View
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col sm={12} md={4}>
+          <Card className="m-4">
+            <Card.Header></Card.Header>
+            <Card.Body className="text-center">
+              <h1>
+                <GiMeal className="text-warning" />
+              </h1>
+              <hr />
+              <h4>Categories</h4>
+              <Link to={`/categories`}>
+                <Button size="sm" variant="success" className="mt-4">
+                  View
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col sm={12} md={4}>
+          <Card className="m-4">
+            <Card.Header></Card.Header>
+            <Card.Body className="text-center">
+              <h1>
+                <GiMeal className="text-warning" />
+              </h1>
+              <hr />
+              <h4>Ingredients</h4>
+              <Link to={`/ingredients`}>
+                <Button size="sm" variant="success" className="mt-4">
+                  View
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </Container>
   );

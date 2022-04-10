@@ -9,12 +9,13 @@ import IngredientsInRecipeForm from "./IngredientsInRecipeForm";
 import {
   addRecipe,
   getRecipeIngredients,
+  resetCurrent,
   resetMessage,
   updateRecipe,
 } from "../../store/recipes/recipe-slice";
 import { toast } from "react-toastify";
-import EditIngredientInRecipe from "./EditIngredientsInRecipe";
 import RecipeIngredientList from "./RecipeIngredientList";
+import EditIngredientInRecipe from "./EditIngredientsInRecipe";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ const RecipeForm = () => {
   const [ingredientList, setIngredientList] = useState([
     { ingredientId: "", quantity: 0, unit: "" },
   ]);
+
+  const { recipeIngredients } = useSelector(
+    (state) => state.recipe
+  );
 
   const {
     register,
@@ -63,11 +68,18 @@ const RecipeForm = () => {
       navigate("/recipes");
       alert(JSON.stringify(data));
     } else {
-      dispatch(updateRecipe(data));
-      // toast.info("Ingredient updated.");
-      // clearForm();
-      // navigate("/ingredients");
+      data.addRecipeIngredientDto = [];
+      data.id = currentRecipe.id;
       alert(JSON.stringify(data));
+      if (isError) {
+        toast.error(message);
+        dispatch(resetMessage());
+        return;
+      }
+      dispatch(updateRecipe(data));
+      toast.info("Recipe updated.");
+      clearForm();
+      navigate("/recipes");
     }
   };
 
@@ -77,11 +89,19 @@ const RecipeForm = () => {
       description: "",
       category: "",
     });
+    dispatch(resetCurrent());
   };
+
+  let addOrEdit;
+  if (Object.keys(currentRecipe).length === 0) {
+    addOrEdit = "Add";
+  } else {
+    addOrEdit = "Update";
+  }
 
   return (
     <Container className="my-5">
-      <h3>Add recipe</h3>
+      <h3>{addOrEdit} recipe</h3>
       <hr />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -135,8 +155,11 @@ const RecipeForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <p>Add ingredients in recipe</p>
-        {/* <IngredientsInRecipeForm setIngredientList={setIngredientList} /> */}
+        <p>{addOrEdit} ingredients in recipe</p>
+
+        {Object.keys(currentRecipe).length === 0 && (
+          <IngredientsInRecipeForm setIngredientList={setIngredientList} />
+        )}
         {Object.keys(currentRecipe).length !== 0 && <RecipeIngredientList />}
         <hr />
         <div className="my-4 d-flex justify-content-between">

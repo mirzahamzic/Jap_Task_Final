@@ -32,11 +32,12 @@ function App() {
             <Route path="/ingredients" element={<Ingredient />} />
             <Route path="/categories" element={<Category />} />
             <Route path="/recipes" element={<Recipe />} />
-            <Route path="/" element={<Login />} />
+            <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
+            <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
 
             {/* protected routes */}
             <Route element={<PrivateRoute />}>
-              <Route path="/home" element={<Home />} />
               <Route path="/addrecipe" element={<RecipeForm />} />
               <Route path="/editrecipe" element={<RecipeForm />} />
               <Route path="/addingredient" element={<IngredientForm />} />
@@ -47,7 +48,7 @@ function App() {
                 path="/recipes/category/:categoryId"
                 element={<RecipesByCategory />}
               />
-              <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
+             
             </Route>
 
             {/* 404 route */}

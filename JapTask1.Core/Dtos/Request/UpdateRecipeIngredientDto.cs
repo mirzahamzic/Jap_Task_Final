@@ -9,7 +9,7 @@ namespace JapTask1.Core.Dtos.Request
 {
     public class UpdateRecipeIngredientDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int IngredientId { get; set; }
         public string Name { get; set; }
         public double Quantity { get; set; }

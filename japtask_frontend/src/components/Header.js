@@ -33,38 +33,31 @@ function Header() {
                 </>
               )}
 
-              {user && (
-                <>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="secondary">
-                      <span className="me-1">
-                        <FaUser />
-                      </span>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item as={NavLink} to="/recipes">
-                        Recipes
+              <>
+                <Dropdown>
+                  <Dropdown.Toggle variant="secondary">
+                    <span className="me-1">Menu</span>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item as={NavLink} to="/recipes">
+                      Recipes
+                    </Dropdown.Item>
+                    <Dropdown.Item as={NavLink} to="/ingredients">
+                      Ingredients
+                    </Dropdown.Item>
+                    <Dropdown.Item as={NavLink} to="/categories">
+                      Categories
+                    </Dropdown.Item>
+                    <Dropdown.Divider />
+                    {user && (
+                      <Dropdown.Item onClick={onLogout}>
+                        <FaUser />   Logout
                       </Dropdown.Item>
-                      <Dropdown.Item as={NavLink} to="/ingredients">
-                        Ingredients
-                      </Dropdown.Item>
-                      <Dropdown.Item as={NavLink} to="/categories">
-                        Categories{" "}
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </>
-              )}
+                    )}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </>
             </Nav>
-            {user && (
-              <div>
-                <Button as={Link} to="/addrecipe" variant="success">
-                  <FaPlus /> Add Recipe
-                </Button>
-              </div>
-            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

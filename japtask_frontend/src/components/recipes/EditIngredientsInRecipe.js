@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllIngredients } from "../../store/ingredients/ingredient-slice";
 
 const EditIngredientInRecipe = (props) => {
-  const { recipeIngredients } = useSelector((state) => state.recipe);
-  const [inputList, setInputList] = useState([...recipeIngredients]);
+  const { recipeIngredients } = useSelector((state) => state.recipeIngredient);
+  
+  const [inputList, setInputList] = useState(recipeIngredients);
 
   const dispatch = useDispatch();
 
@@ -68,11 +69,11 @@ const EditIngredientInRecipe = (props) => {
                 onChange={(e) => handleInputChange(e, i)}
               >
                 <option default>Choose measure unit</option>
-                <option value="Kg">Kilogram</option>
-                <option value="Gr">Gram</option>
-                <option value="L">Liter</option>
-                <option value="Ml">Milliliter</option>
-                <option value="kom">Piece</option>
+                <option value="Kg">Kg</option>
+                <option value="Gr">Gr</option>
+                <option value="L">L</option>
+                <option value="Ml">Ml</option>
+                <option value="kom">kom</option>
               </Form.Select>
             </Col>
 

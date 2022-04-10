@@ -9,9 +9,9 @@ import {
   deleteRecipe,
   deleteStateRecipe,
   getRecipe,
-  getRecipeIngredients,
 } from "../../store/recipes/recipe-slice";
 import { getAllCategories } from "../../store/categories/category-slice";
+import { getRecipeIngredients } from "../../store/recipeingredients/recipeingredients-slice";
 
 const RecipeItem = ({ recipe, index }) => {
   const dispatch = useDispatch();
@@ -60,7 +60,6 @@ const RecipeItem = ({ recipe, index }) => {
               variant="success"
               size="sm"
               className="me-2"
-              onClick={handleEdit}
             >
               Details
             </Button>

@@ -69,7 +69,7 @@ const deleteRecipe = async (id, token) => {
 };
 
 // Get all ingredients in recipe
-const recipeIngredients = async (id, token) => {
+const getRecipeIngredients = async (id, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -80,16 +80,16 @@ const recipeIngredients = async (id, token) => {
   return response.data;
 };
 
-const ingredientService = {
+const recipeService = {
   getAllRecipes,
   getRecipeById,
   addRecipe,
   updateRecipe,
   deleteRecipe,
-  recipeIngredients,
+  getRecipeIngredients,
 };
 
-export default ingredientService;
+export default recipeService;
 
 // import axios from "axios";
 

@@ -18,6 +18,8 @@ const IngredientList = () => {
   const { pageSizeRedux, minRangeRedux, maxRangeRedux, unitsRedux, nameRedux } =
     useSelector((state) => state.paging);
 
+  const { user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const [sortBy, setSortBy] = useState("");
@@ -62,9 +64,11 @@ const IngredientList = () => {
       <section className="my-5 d-flex justify-content-between">
         <h1>Ingredients</h1>
         <div>
-          <Button as={Link} to="/addingredient" variant="success" size="lg">
-            <FaPlus /> Add Ingredient
-          </Button>
+          {user && (
+            <Button as={Link} to="/addingredient" variant="success" size="lg">
+              <FaPlus /> Add Ingredient
+            </Button>
+          )}
         </div>
       </section>
       <Row className="my-5">
