@@ -3,7 +3,6 @@ import categoryService from "./category-services";
 
 const initialState = {
   categories: [],
-  categoriesInMenu: [],
   currentCategory: {},
   status: "",
   message: "",
@@ -15,10 +14,13 @@ const initialState = {
 export const getAllCategories = createAsyncThunk(
   "categories/getAllCategories",
   async (params, thunkAPI) => {
+    console.log(params);
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      return await categoryService.getAllCategories(params, token);
+      // const token = thunkAPI.getState().auth.user.data;
+      return await categoryService.getAllCategories(params);
     } catch (error) {
+      console.log(error);
+
       const message =
         (error.response &&
           error.response.data &&
@@ -95,7 +97,7 @@ export const updateCategory = createAsyncThunk(
 
 // Delete category by Id
 export const deleteCategory = createAsyncThunk(
-  "categories/getCategory",
+  "categories/deleteCategory",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.data;
@@ -122,7 +124,9 @@ export const categorySlice = createSlice({
       state.categories = state.categories.filter(
         (category) => category.id !== action.payload
       );
-      console.log(state.categories);
+    },
+    resetCurrent(state) {
+      state.currentCategory = {};
     },
   },
   extraReducers: {
@@ -191,5 +195,5 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { reset, deleteStateCategory } = categorySlice.actions;
+export const { reset, deleteStateCategory,resetCurrent } = categorySlice.actions;
 export default categorySlice.reducer;

@@ -105,7 +105,7 @@ namespace JapTask1.Services.RecipeService
                     .Include(r => r.Category)
                     .Include(r => r.RecipesIngredients)
                     .ThenInclude(i => i.Ingredient)
-                    .Where(r => r.User.Id == GetUserId())
+                    //.Where(r => r.User.Id == GetUserId())
                     .AsQueryable();
 
             if (req.Limit != null)
@@ -132,7 +132,7 @@ namespace JapTask1.Services.RecipeService
                      .Include(r => r.Category)
                      .Include(r => r.RecipesIngredients)
                      .ThenInclude(i => i.Ingredient)
-                     .Where(r => r.CategoryId == categoryId && r.User.Id == GetUserId())
+                     .Where(r => r.CategoryId == categoryId)
                      .AsQueryable();
 
             if (req.Limit != null)
@@ -159,7 +159,7 @@ namespace JapTask1.Services.RecipeService
                 .Include(r => r.Category)
                 .Include(r => r.RecipesIngredients)
                 .ThenInclude(i => i.Ingredient)
-                .FirstOrDefaultAsync(r => r.Id == recipeId && r.UserId == GetUserId());
+                .FirstOrDefaultAsync(r => r.Id == recipeId);
 
             if (dbRecipes == null)
             {
@@ -178,7 +178,7 @@ namespace JapTask1.Services.RecipeService
                  .Include(r => r.Category)
                  .Include(r => r.RecipesIngredients)
                  .ThenInclude(i => i.Ingredient)
-                 .Where(r => (r.Name.ToLower().Contains(req.SearchTerm) || r.Description.ToLower().Contains(req.SearchTerm)) && r.UserId == GetUserId())
+                 .Where(r => (r.Name.ToLower().Contains(req.SearchTerm) || r.Description.ToLower().Contains(req.SearchTerm)))
                  .AsQueryable();
 
             if (req.Limit != null)

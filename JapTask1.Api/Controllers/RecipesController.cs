@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace JapTask1.Api.Controllers
 {
 
-    [Authorize]
     [Route("api/[controller]")]
     [EnableCors("CORS")]
     [ApiController]
@@ -25,6 +24,7 @@ namespace JapTask1.Api.Controllers
             _recipeService = recipeService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] AddRecipeDto newRecipe)
         {
@@ -60,6 +60,7 @@ namespace JapTask1.Api.Controllers
             return Ok(await _recipeService.GetByCategory(categoryId, req));
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateRecipeDto newRecipe)
         {
@@ -67,6 +68,7 @@ namespace JapTask1.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

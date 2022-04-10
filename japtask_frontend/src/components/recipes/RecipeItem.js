@@ -18,6 +18,7 @@ const RecipeItem = ({ recipe, index }) => {
   const navigate = useNavigate();
 
   const { categories, isLoading } = useSelector((state) => state.category);
+  const { user } = useSelector((state) => state.auth);
 
   const [show, setShow] = useState(false);
 
@@ -56,25 +57,25 @@ const RecipeItem = ({ recipe, index }) => {
         <td>{getCategoryName()}</td>
         <td className="d-flex justify-content-end">
           <Link to={`/recipes/${recipe.id}`}>
-            <Button
-              variant="success"
-              size="sm"
-              className="me-2"
-            >
+            <Button variant="success" size="sm" className="me-2">
               Details
             </Button>
           </Link>
-          <Button
-            variant="warning"
-            size="sm"
-            className="me-2"
-            onClick={handleEdit}
-          >
-            Edit
-          </Button>
-          <Button variant="danger" size="sm" onClick={handleShow}>
-            Delete
-          </Button>
+          {user && (
+            <Button
+              variant="warning"
+              size="sm"
+              className="me-2"
+              onClick={handleEdit}
+            >
+              Edit
+            </Button>
+          )}
+          {user && (
+            <Button variant="danger" size="sm" onClick={handleShow}>
+              Delete
+            </Button>
+          )}
         </td>
       </tr>
       <SharedModal

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { getAllIngredients } from "../../store/ingredients/ingredient-slice";
 import { setFilterParams } from "../../store/ingredients/ingredient-slice";
-import { unitReverse } from "../../helpers/convertUnits";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ const Filter = () => {
       toast.error("Both min or max fields needs to have a value");
       return;
     }
-    formValues.unit = unitReverse(formValues.unit.toLowerCase());
+
     dispatch(setFilterParams(formValues));
     dispatch(getAllIngredients(formValues));
   };

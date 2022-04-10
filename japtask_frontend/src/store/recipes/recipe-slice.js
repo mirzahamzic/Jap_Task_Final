@@ -16,9 +16,9 @@ export const getAllRecipes = createAsyncThunk(
   "recipes/getAllRecipes",
   async (params, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      return await recipeService.getAllRecipes(params, token);
+      return await recipeService.getAllRecipes(params);
     } catch (error) {
+      console.log(error)
       const message =
         (error.response &&
           error.response.data &&
@@ -36,8 +36,7 @@ export const getRecipe = createAsyncThunk(
   "recipes/getRecipe",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      return await recipeService.getRecipeById(id, token);
+      return await recipeService.getRecipeById(id);
     } catch (error) {
       const message =
         (error.response &&
@@ -56,9 +55,7 @@ export const addRecipe = createAsyncThunk(
   "ingredients/addRecipe",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await recipeService.addRecipe(data, token);
+      return await recipeService.addRecipe(data);
     } catch (error) {
       const message =
         (error.response &&
@@ -77,9 +74,7 @@ export const updateRecipe = createAsyncThunk(
   "ingredients/updateRecipe",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await recipeService.updateRecipe(data, token);
+      return await recipeService.updateRecipe(data);
     } catch (error) {
       const message =
         (error.response &&
@@ -98,8 +93,7 @@ export const deleteRecipe = createAsyncThunk(
   "recipes/deleteRecipe",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      return await recipeService.deleteRecipe(id, token);
+      return await recipeService.deleteRecipe(id);
     } catch (error) {
       const message =
         (error.response &&

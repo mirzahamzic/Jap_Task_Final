@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Container } from "react-bootstrap";
 
-import AddRecipe from "./components/recipes/AddRecipe";
+// import AddRecipe from "./components/recipes/AddRecipe";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Home from "./pages/Home";
@@ -34,7 +34,7 @@ function App() {
             <Route path="/recipes" element={<Recipe />} />
             <Route path="/recipes/:recipeId" element={<RecipeDetail />} />
             <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
 
             {/* protected routes */}
             <Route element={<PrivateRoute />}>
@@ -44,11 +44,6 @@ function App() {
               <Route path="/editingredient" element={<IngredientForm />} />
               <Route path="/addcategory" element={<CategoryForm />} />
               <Route path="/editcategory" element={<CategoryForm />} />
-              <Route
-                path="/recipes/category/:categoryId"
-                element={<RecipesByCategory />}
-              />
-             
             </Route>
 
             {/* 404 route */}

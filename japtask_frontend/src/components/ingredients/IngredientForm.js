@@ -119,11 +119,11 @@ const IngredientForm = () => {
             <option default disabled>
               Choose measure unit
             </option>
-            <option value="Kg">Kilogram</option>
-            <option value="Gr">Gram</option>
-            <option value="L">Liter</option>
-            <option value="Ml">Milliliter</option>
-            <option value="kom">Pieces</option>
+            <option value="Kg">Kg</option>
+            <option value="Gr">Gr</option>
+            <option value="L">L</option>
+            <option value="Ml">Ml</option>
+            <option value="kom">kom</option>
           </Form.Select>
           <Form.Control.Feedback type="invalid">
             {errors.purchasedUnitOfMeasure &&

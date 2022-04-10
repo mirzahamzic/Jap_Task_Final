@@ -3,19 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Form, Button, Container } from "react-bootstrap";
-import Spinner from "../shared/Spinner/Spinner";
 import { getAllCategories } from "../../store/categories/category-slice";
 import IngredientsInRecipeForm from "./IngredientsInRecipeForm";
 import {
   addRecipe,
-  getRecipeIngredients,
   resetCurrent,
   resetMessage,
   updateRecipe,
 } from "../../store/recipes/recipe-slice";
 import { toast } from "react-toastify";
 import RecipeIngredientList from "./RecipeIngredientList";
-import EditIngredientInRecipe from "./EditIngredientsInRecipe";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -29,10 +26,6 @@ const RecipeForm = () => {
   const [ingredientList, setIngredientList] = useState([
     { ingredientId: "", quantity: 0, unit: "" },
   ]);
-
-  const { recipeIngredients } = useSelector(
-    (state) => state.recipe
-  );
 
   const {
     register,

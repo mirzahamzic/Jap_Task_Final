@@ -105,7 +105,7 @@ namespace JapTask1.Database
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    recipesIngredients.Add(new RecipeIngredient { RecipeId = random.Next(1, 20), IngredientId = random.Next(1, 10), Quantity = random.NextDouble() * 2, Unit = Units.Kg });
+                    recipesIngredients.Add(new RecipeIngredient { RecipeId = random.Next(1, 20), IngredientId = random.Next(1, 10), Quantity = Math.Round((random.NextDouble() * 2), 2), Unit = Units.Kg });
                 }
                 await context.RecipesIngredients.AddRangeAsync(recipesIngredients);
                 await context.SaveChangesAsync();

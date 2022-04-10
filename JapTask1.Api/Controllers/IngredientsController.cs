@@ -1,6 +1,7 @@
 ﻿using JapTask1.Core.Dtos.Request;
 using JapTask1.Core.Dtos.Response;
 using JapTask1.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,7 @@ namespace JapTask1.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddIngredientDto req)
         {
@@ -43,6 +45,7 @@ namespace JapTask1.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] AddIngredientDto req)
         {
@@ -50,6 +53,7 @@ namespace JapTask1.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

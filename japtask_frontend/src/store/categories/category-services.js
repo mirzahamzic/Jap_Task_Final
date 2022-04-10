@@ -1,77 +1,32 @@
-import axios from "axios";
-
-const BASE_URL = "https://localhost:5001";
+import fetchClient from "../../helpers/apiConfig";
 
 // Get all categories
-const getAllCategories = async (params, token) => {
-  console.log(params);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    params: {
-      page: params.page,
-      pageSize: params.pageSize,
-    },
-  };
-
-  const response = await axios.get(BASE_URL + "/api/Categories/", config);
-
+const getAllCategories = async (params) => {
+  const response = await fetchClient.get("/api/Categories/", params);
   return response.data;
 };
 
 // Get category by Id
-const getCategoryById = async (id, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  const response = await axios.get(BASE_URL + "/api/Categories/" + id, config);
-
+const getCategoryById = async (id) => {
+  const response = await fetchClient.get("/api/Categories/" + id);
   return response.data;
 };
 
 // Add category
-const addCategory = async (data, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  const response = await axios.post(
-    BASE_URL + "/api/Categories/",
-    data,
-    config
-  );
-
+const addCategory = async (data) => {
+  const response = await fetchClient.post("/api/Categories/", data);
   return response.data;
 };
 
 // Update category
 const updateCategory = async (data, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.put(BASE_URL + "/api/Categories/", data, config);
+  const response = await fetchClient.put("/api/Categories/", data);
   return response.data;
 };
 
 // Delete category
 const deleteCategory = async (id, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.delete(
-    BASE_URL + "/api/Categories/" + id,
-    config
-  );
+  const response = await await fetchClient.delete("/api/Categories/" + id);
   return response.data;
 };
 

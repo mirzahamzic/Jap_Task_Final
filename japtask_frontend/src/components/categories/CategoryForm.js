@@ -3,9 +3,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
-import Spinner from '../shared/Spinner/Spinner'
+import Spinner from "../shared/Spinner/Spinner";
 import { toast } from "react-toastify";
-import { updateCategory, addCategory } from "../../store/categories/category-slice";
+import {
+  updateCategory,
+  addCategory,
+  resetCurrent,
+} from "../../store/categories/category-slice";
 
 const CategoryForm = () => {
   const dispatch = useDispatch();
@@ -26,7 +30,7 @@ const CategoryForm = () => {
     } else {
       clearForm();
     }
-  }, [currentCategory, reset]);
+  }, [currentCategory]);
 
   const onSubmit = (data) => {
     if (Object.keys(currentCategory).length === 0) {

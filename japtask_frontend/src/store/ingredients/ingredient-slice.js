@@ -22,9 +22,7 @@ export const getAllIngredients = createAsyncThunk(
   "ingredients/getAllIngredients",
   async (params, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await ingredientService.getAllIngredients(params, token);
+      return await ingredientService.getAllIngredients(params);
     } catch (error) {
       const message =
         (error.response &&
@@ -43,9 +41,7 @@ export const getIngredient = createAsyncThunk(
   "ingredients/getIngredient",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await ingredientService.getIngredientById(id, token);
+      return await ingredientService.getIngredientById(id);
     } catch (error) {
       const message =
         (error.response &&
@@ -64,9 +60,7 @@ export const addIngredient = createAsyncThunk(
   "ingredients/addIngredient",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await ingredientService.addIngredient(data, token);
+      return await ingredientService.addIngredient(data);
     } catch (error) {
       const message =
         (error.response &&
@@ -85,9 +79,7 @@ export const updateIngredient = createAsyncThunk(
   "ingredients/updateIngredient",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await ingredientService.updateIngredient(data, token);
+      return await ingredientService.updateIngredient(data);
     } catch (error) {
       const message =
         (error.response &&
@@ -106,9 +98,7 @@ export const deleteIngredient = createAsyncThunk(
   "ingredients/updateIngredient",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.data;
-      // const token = "dummytokenfornow";
-      return await ingredientService.deleteIngredient(id, token);
+      return await ingredientService.deleteIngredient(id);
     } catch (error) {
       const message =
         (error.response &&
