@@ -13,6 +13,9 @@ const Paginator = (props) => {
   };
 
   useEffect(() => {
+    if (pageSize == "Records") {
+      return;
+    }
     dispatch(setPageSizeRedux(pageSize));
     dispatch(props.action({ pageSize, page: 1 }));
   }, [pageSize, dispatch]);
@@ -20,12 +23,13 @@ const Paginator = (props) => {
   return (
     <>
       <Form.Select onChange={onPageChange} value={pageSize}>
-        <option default>Ingredients number</option>
-        <option value="5">1-5</option>
-        <option value="10">5-10</option>
-        <option value="15">15-20</option>
-        <option value="20">20-25</option>
-        <option value="25">25-30</option>
+        <option default>Records</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
       </Form.Select>
     </>
   );

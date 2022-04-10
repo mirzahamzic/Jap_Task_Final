@@ -65,10 +65,12 @@ const RecipeList = () => {
         <thead>
           <tr>
             <th width="5%">#</th>
-            <th width="30%">Recipe name</th>
-            <th width="40%">Description</th>
+            <th width="25%">Recipe name</th>
+            <th width="25%">Description</th>
             <th width="10%">Category</th>
-            <th width="30%">Action</th>
+            <th width="10%">Price</th>
+            <th width="10%">Rec.Price</th>
+            <th width="20%">Action</th>
           </tr>
         </thead>
         <tbody>

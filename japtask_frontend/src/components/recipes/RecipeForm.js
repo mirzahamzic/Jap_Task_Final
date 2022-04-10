@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { getAllCategories } from "../../store/categories/category-slice";
 import IngredientsInRecipeForm from "./IngredientsInRecipeForm";
 import {
@@ -26,6 +26,7 @@ const RecipeForm = () => {
   const [ingredientList, setIngredientList] = useState([
     { ingredientId: "", quantity: 0, unit: "" },
   ]);
+  const [checked, setChecked] = useState(false);
 
   const {
     register,
@@ -128,25 +129,47 @@ const RecipeForm = () => {
             {errors.description && errors.description.message}
           </Form.Control.Feedback>
         </Form.Group>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label>Recipe category</Form.Label>
+              <Form.Select
+                {...register("categoryId", {
+                  required: "Category is required.",
+                })}
+                isInvalid={errors.categoryId}
+              >
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                {errors.categoryId && errors.categoryId.message}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col md={{ span: 4, offset: 4 }}>
+            <Form.Group>
+              <Form.Check
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+                label="Add Recommended price for recipe?"
+              ></Form.Check>
+            </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Recipe category</Form.Label>
-          <Form.Select
-            {...register("categoryId", {
-              required: "Category is required.",
-            })}
-            isInvalid={errors.categoryId}
-          >
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            {errors.categoryId && errors.categoryId.message}
-          </Form.Control.Feedback>
-        </Form.Group>
+            {checked && (
+              <Form.Control
+                type="number"
+                min="0"
+                step="0.01"
+                {...register("recomendedPrice")}
+                placeholder="Recommendend price..."
+              />
+            )}
+          </Col>
+        </Row>
 
         <p>{addOrEdit} ingredients in recipe</p>
 

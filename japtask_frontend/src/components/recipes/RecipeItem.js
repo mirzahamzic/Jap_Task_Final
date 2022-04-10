@@ -55,6 +55,8 @@ const RecipeItem = ({ recipe, index }) => {
         <td>{recipe.name}</td>
         <td>{recipe.description}</td>
         <td>{getCategoryName()}</td>
+        <td className="text-success">{recipe.totalCost}</td>
+        <td className="text-danger">{recipe.recomendedPrice}</td>
         <td className="d-flex justify-content-end">
           <Link to={`/recipes/${recipe.id}`}>
             <Button variant="success" size="sm" className="me-2">

@@ -8,6 +8,7 @@ using JapTask1.Database;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,6 @@ namespace JapTask1.Services.RecipeService
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         private readonly int userIdForTesting = 0; //set to 1 for testing, set to 0 for prod.
 
         public RecipeService(AppDbContext context, IMapper mapper, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
@@ -35,6 +35,7 @@ namespace JapTask1.Services.RecipeService
             _mapper = mapper;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+
         }
 
         //getting user id from token
@@ -115,6 +116,8 @@ namespace JapTask1.Services.RecipeService
                     .Take((int)req.PageSize)
                     .AsQueryable();
             }
+
+            throw new Exception("Some test error");
 
             var dbRecipes = await query
                     .Select(r => _mapper.Map<GetRecipeDto>(r))
@@ -224,11 +227,11 @@ namespace JapTask1.Services.RecipeService
 
         public async Task<ServiceResponse<GetRecipeDto>> Delete(int id)
         {
-            var dbRecipe = await _context.Ingredients.FirstOrDefaultAsync(i => i.Id == id);
+            var dbRecipe = await _context.Recipes.FirstOrDefaultAsync(i => i.Id == id);
 
             if (dbRecipe == null) { throw new ArgumentNullException(nameof(dbRecipe)); }
 
-            _context.Ingredients.Remove(dbRecipe);
+            _context.Recipes.Remove(dbRecipe);
 
             _context.SaveChanges();
 

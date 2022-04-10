@@ -5,6 +5,7 @@ using JapTask1.Services.IngredientService;
 using JapTask1.Services.RecipeService;
 using JapTask1.Services.UserService;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace JapTask1.Api.Extensions
 {

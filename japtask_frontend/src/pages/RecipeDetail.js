@@ -34,14 +34,27 @@ const RecipeDetail = () => {
         <span className="ms-4">{currentRecipe.name}</span>
       </h1>
       <hr />
-      <div>
-        <h1 className="my-5">
+      <div className="d-flex justify-content-between">
+        <h3 className="my-5">
           Recipe cost:{" "}
-          <span className="text-success">
+          <span className="fs-1 text-success">
             {currentRecipe.totalCost}
             KM
           </span>
-        </h1>
+        </h3>
+        {currentRecipe.recomendedPrice ? (
+          <>
+            <h4 className="my-5">
+              Recomended price:{" "}
+              <span className="fs-2 text-warning">
+                {currentRecipe.recomendedPrice}
+                KM
+              </span>
+            </h4>
+          </>
+        ) : (
+          ""
+        )}
       </div>
       <div>
         <h6>{currentRecipe.description}</h6>
@@ -67,9 +80,7 @@ const RecipeDetail = () => {
                   <td>{ingredient.name}</td>
                   <td>{ingredient.quantity}</td>
                   <td>{ingredient.unit}</td>
-                  <td className="text-success">
-                    {ingredient.price} KM
-                  </td>
+                  <td className="text-success">{ingredient.price} KM</td>
                 </tr>
               ))}
           </tbody>
