@@ -10,6 +10,7 @@ import {
   addCategory,
   resetCurrent,
 } from "../../store/categories/category-slice";
+import { checkAddOrUpdate } from "../../helpers/helpers";
 
 const CategoryForm = () => {
   const dispatch = useDispatch();
@@ -51,9 +52,12 @@ const CategoryForm = () => {
     });
   };
 
+  const addOrEdit = checkAddOrUpdate(currentCategory);
+
+
   return (
     <Container className="my-5 w-75">
-      <h3>Add Category</h3>
+      <h3>{addOrEdit} Category</h3>
       <hr />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">

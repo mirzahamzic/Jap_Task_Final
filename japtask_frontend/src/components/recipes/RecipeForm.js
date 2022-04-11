@@ -13,6 +13,7 @@ import {
 } from "../../store/recipes/recipe-slice";
 import { toast } from "react-toastify";
 import RecipeIngredientList from "./RecipeIngredientList";
+import { checkAddOrUpdate } from "../../helpers/helpers";
 
 const RecipeForm = () => {
   const dispatch = useDispatch();
@@ -84,12 +85,8 @@ const RecipeForm = () => {
     dispatch(resetCurrent());
   };
 
-  let addOrEdit;
-  if (Object.keys(currentRecipe).length === 0) {
-    addOrEdit = "Add";
-  } else {
-    addOrEdit = "Update";
-  }
+  const addOrEdit = checkAddOrUpdate(currentRecipe);
+
 
   return (
     <Container className="my-5">

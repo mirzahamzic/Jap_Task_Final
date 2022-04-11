@@ -9,6 +9,7 @@ import {
   addIngredient,
   updateIngredient,
 } from "../../store/ingredients/ingredient-slice";
+import { checkAddOrUpdate } from "../../helpers/helpers";
 
 const IngredientForm = () => {
   const dispatch = useDispatch();
@@ -54,9 +55,11 @@ const IngredientForm = () => {
     });
   };
 
+  const addOrEdit = checkAddOrUpdate(currentIngredient);
+
   return (
     <Container className="my-5 w-75">
-      <h3>Add Ingredient</h3>
+      <h3>{addOrEdit} Ingredient</h3>
       <hr />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
