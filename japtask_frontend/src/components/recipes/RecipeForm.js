@@ -60,11 +60,9 @@ const RecipeForm = () => {
       }
       toast.info("Ingredient added.");
       navigate("/recipes");
-      alert(JSON.stringify(data));
     } else {
       data.addRecipeIngredientDto = [];
       data.id = currentRecipe.id;
-      alert(JSON.stringify(data));
       if (isError) {
         toast.error(message);
         dispatch(resetMessage());
@@ -151,13 +149,15 @@ const RecipeForm = () => {
             </Form.Group>
           </Col>
           <Col md={{ span: 4, offset: 4 }}>
-            <Form.Group>
-              <Form.Check
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-                label="Add Recommended price for recipe?"
-              ></Form.Check>
-            </Form.Group>
+            {Object.keys(currentRecipe).length !== 0 && (
+              <Form.Group>
+                <Form.Check
+                  checked={checked}
+                  onChange={() => setChecked(!checked)}
+                  label="Add Recommended price for recipe?"
+                ></Form.Check>
+              </Form.Group>
+            )}
 
             {checked && (
               <Form.Control

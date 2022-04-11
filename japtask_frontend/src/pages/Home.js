@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="my-5" >
       <Row>
         <Col sm={12} md={4}>
           <Card className="m-4">

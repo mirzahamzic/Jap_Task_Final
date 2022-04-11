@@ -23,7 +23,7 @@ namespace JapTask1.Services.RecipeService
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly int userIdForTesting = 0; //set to 1 for testing, set to 0 for prod.
+        private readonly int userIdForTesting = 0; //set to 1 for unit testing, set to 0 for prod.
 
         public RecipeService(AppDbContext context, IMapper mapper, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {

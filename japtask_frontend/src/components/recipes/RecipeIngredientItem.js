@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
-import { GiMeal } from "react-icons/gi";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import SharedModal from "../shared/SharedModal";
 import { toast } from "react-toastify";
 import { getAllIngredients } from "../../store/ingredients/ingredient-slice";
 import {
@@ -16,7 +13,6 @@ import {
 
 const RecipeIngredientItem = ({ recipeIngredient, index }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [ingInRecipe, setIngInRecipe] = useState({
     ingredientId: recipeIngredient.ingredientId,
@@ -49,7 +45,6 @@ const RecipeIngredientItem = ({ recipeIngredient, index }) => {
       return;
     }
     ingInRecipe.id = recipeIngredient.id;
-    alert(JSON.stringify(ingInRecipe));
     dispatch(
       updateRecipeIngredients({
         data: ingInRecipe,
@@ -58,7 +53,6 @@ const RecipeIngredientItem = ({ recipeIngredient, index }) => {
     );
     dispatch(addIngredientToRecipe({ingInRecipe}))
     toast.info("Ingredient in recipe updated.");
-    // navigate("/recipes");
     dispatch(getRecipeIngredients(currentRecipe.id));
   };
 

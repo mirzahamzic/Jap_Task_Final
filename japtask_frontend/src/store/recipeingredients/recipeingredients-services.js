@@ -1,7 +1,4 @@
-import axios from "axios";
 import fetchClient from "../../helpers/apiConfig";
-
-const BASE_URL = "https://localhost:5001";
 
 // Get all ingredients in recipe
 const getRecipeIngredients = async (id) => {
@@ -10,16 +7,16 @@ const getRecipeIngredients = async (id) => {
 };
 
 // Update all ingredients in recipe
-const updateRecipeIngredients = async (recIngData, token) => {
+const updateRecipeIngredients = async (recIngData) => {
   const { data, recipeId, id } = recIngData;
   const response = await fetchClient.put("/api/Recipe/" + recipeId, data);
   return response.data;
 };
 
 // delete ingredient in recipe
-const deleteRecipeIngredients = async (data, token) => {
+const deleteRecipeIngredients = async (data) => {
   const { recipeId, id } = data;
-  const response = await axios.delete(`/api/Recipe/${recipeId}/${id}`);
+  const response = await fetchClient.delete(`/api/Recipe/${recipeId}/${id}`);
   return response.data;
 };
 
