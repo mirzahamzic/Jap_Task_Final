@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace JapTask1.Services
@@ -39,7 +38,31 @@ namespace JapTask1.Services
             var response = _mapper.Map<GetRecipeIngredientDto>(newIngredient);
 
             return response;
+        }
 
+        public async Task<ServiceResponse<GetRecipeIngredientDto>> Delete(int id, int recipeId)
+        {
+            var dbIngredient = await _context.RecipesIngredients
+                    .FirstOrDefaultAsync(i => i.RecipeId == recipeId && i.Id == id);
+
+            if (dbIngredient == null) { throw new ArgumentNullException(nameof(dbIngredient)); }
+
+            _context.RecipesIngredients.Remove(dbIngredient);
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<GetRecipeIngredientDto>() { Message = "Deleted." };
+        }
+
+        public async Task<ServiceResponse<List<UpdateRecipeIngredientDto>>> Get(int recipeId)
+        {
+            var dbRecipeIngredients = await _context.RecipesIngredients
+                    .Where(r => r.RecipeId == recipeId)
+                    .Include(i => i.Ingredient)
+                    .ToListAsync();
+
+            var res = _mapper.Map<List<UpdateRecipeIngredientDto>>(dbRecipeIngredients);
+
+            return new ServiceResponse<List<UpdateRecipeIngredientDto>>() { Data = res };
         }
 
         public async Task<GetRecipeIngredientDto> Update(int recipeId, UpdateRecipeIngredientDto ingredient)
@@ -66,32 +89,6 @@ namespace JapTask1.Services
             var response = _mapper.Map<GetRecipeIngredientDto>(updatedIngredient);
 
             return response;
-        }
-
-        public async Task<ServiceResponse<GetRecipeIngredientDto>> Delete(int id, int recipeId)
-        {
-            var dbIngredient = await _context.RecipesIngredients
-                    .FirstOrDefaultAsync(i => i.RecipeId == recipeId && i.Id == id);
-
-            if (dbIngredient == null) { throw new ArgumentNullException(nameof(dbIngredient)); }
-
-            _context.RecipesIngredients.Remove(dbIngredient);
-            await _context.SaveChangesAsync();
-
-            return new ServiceResponse<GetRecipeIngredientDto>() { Message = "Deleted." };
-        }
-
-        public async Task<ServiceResponse<List<UpdateRecipeIngredientDto>>> Get(int recipeId)
-        {
-            var dbRecipeIngredients = await _context.RecipesIngredients
-                    .Where(r => r.RecipeId == recipeId)
-                    .Include(i => i.Ingredient)
-                    .ToListAsync();
-
-            var res = _mapper.Map<List<UpdateRecipeIngredientDto>>(dbRecipeIngredients);
-
-
-            return new ServiceResponse<List<UpdateRecipeIngredientDto>>() { Data = res };
         }
     }
 }

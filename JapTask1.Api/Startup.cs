@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace JapTask1.Api
 {
@@ -33,6 +34,8 @@ namespace JapTask1.Api
 
             services.AddDBConnection(Configuration); //database config
 
+            services.AddLogDBConnection(Configuration); //database config
+
             services.AddAutoMapper(typeof(Startup)); //automapper config
 
             services.AddAuthConfig(Configuration); //jwt auth settings
@@ -43,7 +46,7 @@ namespace JapTask1.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +70,8 @@ namespace JapTask1.Api
             {
                 endpoints.MapControllers();
             });
+
+            loggerFactory.AddLog4Net();
 
             DatabaseSeed.Seed(app); //seeding the database upon first run of the app
 

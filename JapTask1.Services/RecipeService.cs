@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using JapTask1.Common.Enums;
 using JapTask1.Core.Dtos.Request;
 using JapTask1.Core.Dtos.Response;
 using JapTask1.Core.Entities;
@@ -8,15 +7,12 @@ using JapTask1.Database;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-
 
 namespace JapTask1.Services.RecipeService
 {
@@ -35,7 +31,6 @@ namespace JapTask1.Services.RecipeService
             _mapper = mapper;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-
         }
 
         //getting user id from token
@@ -54,7 +49,6 @@ namespace JapTask1.Services.RecipeService
 
         public async Task<ServiceResponse<AddRecipeDto>> Create(AddRecipeDto recipe)
         {
-
             if (recipe.AddRecipeIngredientDto.Count == 0)
             {
                 throw new ArgumentException("Recipe needs at least one ingredient.");
@@ -116,8 +110,6 @@ namespace JapTask1.Services.RecipeService
                     .Take((int)req.PageSize)
                     .AsQueryable();
             }
-
-            throw new Exception("Some test error");
 
             var dbRecipes = await query
                     .Select(r => _mapper.Map<GetRecipeDto>(r))
@@ -242,6 +234,3 @@ namespace JapTask1.Services.RecipeService
         }
     }
 }
-
-
-
